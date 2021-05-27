@@ -1,36 +1,38 @@
 package com.chavesricardo.projetogpmo3.domain;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
-public class Paciente implements Serializable {
+public class Cirurgia implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
-	private Integer registro;
+	private Date data;
 	
-	@OneToMany(mappedBy="paciente")
-	private List<Cirurgia> cirurgias = new ArrayList<>();
+	@ManyToOne
+	@JoinColumn(name="paciente_id")
+	private Paciente paciente;
 	
-	public Paciente() {
+	public Cirurgia() {
 	}
 
-	public Paciente(Integer id, Integer registro) {
+	public Cirurgia(Integer id, Date data, Paciente paciente) {
 		super();
 		this.id = id;
-		this.registro = registro;
+		this.data = data;
+		this.paciente = paciente;
 	}
-	
+
 	public Integer getId() {
 		return id;
 	}
@@ -39,20 +41,20 @@ public class Paciente implements Serializable {
 		this.id = id;
 	}
 
-	public Integer getRegistro() {
-		return registro;
+	public Date getData() {
+		return data;
 	}
 
-	public void setRegistro(Integer registro) {
-		this.registro = registro;
+	public void setData(Date data) {
+		this.data = data;
 	}
 
-	public List<Cirurgia> getCirurgias() {
-		return cirurgias;
+	public Paciente getPaciente() {
+		return paciente;
 	}
 
-	public void setCirurgias(List<Cirurgia> cirurgias) {
-		this.cirurgias = cirurgias;
+	public void setPaciente(Paciente paciente) {
+		this.paciente = paciente;
 	}
 
 	@Override
@@ -71,7 +73,7 @@ public class Paciente implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Paciente other = (Paciente) obj;
+		Cirurgia other = (Cirurgia) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -79,5 +81,8 @@ public class Paciente implements Serializable {
 			return false;
 		return true;
 	}
+	
+	
+	
 	
 }
