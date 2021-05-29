@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.chavesricardo.projetogpmo3.domain.Paciente;
 import com.chavesricardo.projetogpmo3.repositories.PacienteRepository;
+import com.chavesricardo.projetogpmo3.services.exceptions.ObjectNotFoundException;
 
 @Service
 public class PacienteService {
@@ -16,7 +17,8 @@ public class PacienteService {
 	
 	public Paciente buscar(Integer id) {
 		Optional<Paciente> obj = repo.findById(id);
-		return obj.orElse(null);
+		return obj.orElseThrow(() -> new ObjectNotFoundException(
+				"Objeto não encontrado! Id: " + id + ", Tipo: " + Paciente.class.getName()));
 	}
 	
 }

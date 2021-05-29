@@ -1,3 +1,4 @@
+
 package com.chavesricardo.projetogpmo3.domain;
 
 import java.io.Serializable;
@@ -84,8 +85,5 @@ public class Cirurgia implements Serializable {
 			return false;
 		return true;
 	}
-	
-	
-	
 	
 }
