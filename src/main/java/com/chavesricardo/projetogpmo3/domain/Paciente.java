@@ -19,6 +19,7 @@ public class Paciente implements Serializable {
 	private Integer id;
 	private Integer registro;
 	
+	
 	@OneToMany(mappedBy="paciente")
 	private List<Cirurgia> cirurgias = new ArrayList<>();
 	

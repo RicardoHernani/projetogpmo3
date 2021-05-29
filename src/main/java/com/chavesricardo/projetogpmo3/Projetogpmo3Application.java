@@ -42,7 +42,7 @@ public class Projetogpmo3Application implements CommandLineRunner {
 		
 		pacienteRepository.saveAll(Arrays.asList(pct1, pct2));
 		cirurgiaRepository.saveAll(Arrays.asList(cir1, cir2, cir3));
-
+	
 	}
 
 }
