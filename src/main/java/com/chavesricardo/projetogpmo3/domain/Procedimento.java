@@ -1,10 +1,6 @@
-
 package com.chavesricardo.projetogpmo3.domain;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,36 +8,38 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-public class Cirurgia implements Serializable {
+public class Procedimento implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
-	private Date data;
+	private Integer tipo;
+	private Integer premio;
+	
+	@OneToOne
+	private Referencia referencia;
 	
 	@JsonIgnore
 	@ManyToOne
-	@JoinColumn(name="paciente_id")
-	private Paciente paciente;
+	@JoinColumn(name="cirurgia_id")
+	private Cirurgia cirurgia;
 	
-	
-	@OneToMany(mappedBy="cirurgia")
-	private List<Procedimento> procedimentos = new ArrayList<>();
-	
-	public Cirurgia() {
+	public Procedimento() {
 	}
 
-	public Cirurgia(Integer id, Date data, Paciente paciente) {
+	public Procedimento(Integer id, Integer tipo, Integer premio, Referencia referencia, Cirurgia cirurgia) {
 		super();
 		this.id = id;
-		this.data = data;
-		this.paciente = paciente;
+		this.tipo = tipo;
+		this.premio = premio;
+		this.referencia = referencia;
+		this.cirurgia = cirurgia;
 	}
 
 	public Integer getId() {
@@ -52,28 +50,36 @@ public class Cirurgia implements Serializable {
 		this.id = id;
 	}
 
-	public Date getData() {
-		return data;
+	public Integer getTipo() {
+		return tipo;
 	}
 
-	public void setData(Date data) {
-		this.data = data;
+	public void setTipo(Integer tipo) {
+		this.tipo = tipo;
 	}
 
-	public Paciente getPaciente() {
-		return paciente;
+	public Integer getPremio() {
+		return premio;
 	}
 
-	public void setPaciente(Paciente paciente) {
-		this.paciente = paciente;
+	public void setPremio(Integer premio) {
+		this.premio = premio;
 	}
 	
-	public List<Procedimento> getProcedimentos() {
-		return procedimentos;
+	public Referencia getReferencia() {
+		return referencia;
 	}
 
-	public void setProcedimentos(List<Procedimento> procedimentos) {
-		this.procedimentos = procedimentos;
+	public void setReferencia(Referencia referencia) {
+		this.referencia = referencia;
+	}
+
+	public Cirurgia getCirurgia() {
+		return cirurgia;
+	}
+
+	public void setCirurgia(Cirurgia cirurgia) {
+		this.cirurgia = cirurgia;
 	}
 
 	@Override
@@ -92,7 +98,7 @@ public class Cirurgia implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Cirurgia other = (Cirurgia) obj;
+		Procedimento other = (Procedimento) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -100,5 +106,6 @@ public class Cirurgia implements Serializable {
 			return false;
 		return true;
 	}
+	
 	
 }
