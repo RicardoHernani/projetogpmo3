@@ -21,4 +21,9 @@ public class CirurgiaService {
 				"Objeto não encontrado! Id: " + id + ", Tipo: " + Cirurgia.class.getName()));
 	}
 	
+	public void delete(Integer id) {
+		find(id);
+		repo.deleteById(id);
+		}
+	
 }

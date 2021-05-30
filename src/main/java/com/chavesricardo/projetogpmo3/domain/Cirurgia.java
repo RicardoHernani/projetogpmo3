@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -34,7 +35,7 @@ public class Cirurgia implements Serializable {
 	private Paciente paciente;
 	
 	
-	@OneToMany(mappedBy="cirurgia")
+	@OneToMany(mappedBy="cirurgia", cascade=CascadeType.ALL)
 	private List<Procedimento> procedimentos = new ArrayList<>();
 	
 	public Cirurgia() {
