@@ -17,7 +17,7 @@ public class Paciente implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
-	private Integer registro;
+	private Integer prontuario;
 	
 	
 	@OneToMany(mappedBy="paciente")
@@ -29,7 +29,7 @@ public class Paciente implements Serializable {
 	public Paciente(Integer id, Integer registro) {
 		super();
 		this.id = id;
-		this.registro = registro;
+		this.prontuario = registro;
 	}
 	
 	public Integer getId() {
@@ -40,12 +40,12 @@ public class Paciente implements Serializable {
 		this.id = id;
 	}
 
-	public Integer getRegistro() {
-		return registro;
+	public Integer getProntuario() {
+		return prontuario;
 	}
 
-	public void setRegistro(Integer registro) {
-		this.registro = registro;
+	public void setProntuario(Integer registro) {
+		this.prontuario = registro;
 	}
 
 	public List<Cirurgia> getCirurgias() {
