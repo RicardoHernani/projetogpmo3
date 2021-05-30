@@ -15,7 +15,7 @@ public class PacienteService {
 	@Autowired
 	private PacienteRepository repo;
 	
-	public Paciente buscar(Integer id) {
+	public Paciente find(Integer id) {
 		Optional<Paciente> obj = repo.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
 				"Objeto não encontrado! Id: " + id + ", Tipo: " + Paciente.class.getName()));
@@ -23,6 +23,11 @@ public class PacienteService {
 	
 	public Paciente insert(Paciente obj) {
 		obj.setId(null);
+		return repo.save(obj);
+	}
+	
+	public Paciente update(Paciente obj) {
+		find(obj.getId());
 		return repo.save(obj);
 	}
 	

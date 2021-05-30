@@ -18,8 +18,8 @@ public class CirurgiaResource {
 	private CirurgiaService service;
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
-	public ResponseEntity<?> find(@PathVariable Integer id) {
-		Cirurgia obj = service.buscar(id);
+	public ResponseEntity<Cirurgia> find(@PathVariable Integer id) {
+		Cirurgia obj = service.find(id);
 		return ResponseEntity.ok().body(obj);
 	
 	}

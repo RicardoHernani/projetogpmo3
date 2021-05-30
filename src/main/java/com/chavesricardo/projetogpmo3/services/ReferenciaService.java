@@ -16,7 +16,7 @@ public class ReferenciaService {
 	@Autowired
 	private ReferenciaRepository repo;
 	
-	public Referencia buscar(Integer id) {
+	public Referencia find(Integer id) {
 		Optional<Referencia> obj = repo.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
 				"Objeto não encontrado! Id: " + id + ", Tipo: " + Cirurgia.class.getName()));

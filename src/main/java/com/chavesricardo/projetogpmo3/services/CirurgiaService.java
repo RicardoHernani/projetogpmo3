@@ -15,7 +15,7 @@ public class CirurgiaService {
 	@Autowired
 	private CirurgiaRepository repo;
 	
-	public Cirurgia buscar(Integer id) {
+	public Cirurgia find(Integer id) {
 		Optional<Cirurgia> obj = repo.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
 				"Objeto não encontrado! Id: " + id + ", Tipo: " + Cirurgia.class.getName()));
