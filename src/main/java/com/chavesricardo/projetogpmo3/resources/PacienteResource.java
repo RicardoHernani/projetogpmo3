@@ -27,6 +27,7 @@ public class PacienteResource {
 		return ResponseEntity.ok().body(obj);
 	
 	}
+	
 	@RequestMapping(method=RequestMethod.POST)
 	public ResponseEntity<Void> insert(@RequestBody Paciente obj){
 		obj = service.insert(obj);
@@ -34,6 +35,7 @@ public class PacienteResource {
 				.path("/{id}").buildAndExpand(obj.getId()).toUri();
 		return ResponseEntity.created(uri).build();
 	}
+	
 	@RequestMapping(value="/{id}", method=RequestMethod.PUT)
 	public ResponseEntity<Void> update(@RequestBody Paciente obj, @PathVariable Integer id) {
 		obj.setId(id);
@@ -41,4 +43,9 @@ public class PacienteResource {
 		return ResponseEntity.noContent().build();
 	}
 	
+	@RequestMapping(value="/{id}", method=RequestMethod.DELETE)
+	public ResponseEntity<Void> delete(@PathVariable Integer id) {
+		service.delete(id);
+		return ResponseEntity.noContent().build();
+	}
 }
