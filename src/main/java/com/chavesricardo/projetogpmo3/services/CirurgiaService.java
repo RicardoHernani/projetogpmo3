@@ -25,6 +25,4 @@ public class CirurgiaService {
 		find(id);
 		repo.deleteById(id);
 		}
-
-	
 }

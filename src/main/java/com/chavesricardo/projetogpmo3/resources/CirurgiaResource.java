@@ -11,20 +11,20 @@ import com.chavesricardo.projetogpmo3.domain.Cirurgia;
 import com.chavesricardo.projetogpmo3.services.CirurgiaService;
 
 @RestController
-@RequestMapping("/pacientes/{id}")
+@RequestMapping(value="/cirurgias")
 public class CirurgiaResource {
 	
 	@Autowired
 	private CirurgiaService service;
 	
-	@RequestMapping(value="/cirurgias/{id}", method=RequestMethod.GET)
+	@RequestMapping(value="/{id}", method=RequestMethod.GET)
 	public ResponseEntity<Cirurgia> find(@PathVariable Integer id) {
 		Cirurgia obj = service.find(id);
 		return ResponseEntity.ok().body(obj);
 	
 	}
 	
-	@RequestMapping(value="/cirurgias/{id}", method=RequestMethod.DELETE)
+	@RequestMapping(value="/{id}", method=RequestMethod.DELETE)
 	public ResponseEntity<Void> delete(@PathVariable Integer id) {
 		service.delete(id);
 		return ResponseEntity.noContent().build();
