@@ -21,6 +21,16 @@ public class CirurgiaService {
 				"Objeto não encontrado! Id: " + id + ", Tipo: " + Cirurgia.class.getName()));
 	}
 	
+	public Cirurgia insert(Cirurgia obj) {
+		obj.setId(null);
+		return repo.save(obj);
+	}
+	
+	public Cirurgia update(Cirurgia obj) {
+		find(obj.getId());
+		return repo.save(obj);
+	}
+	
 	public void delete(Integer id) {
 		find(id);
 		repo.deleteById(id);
