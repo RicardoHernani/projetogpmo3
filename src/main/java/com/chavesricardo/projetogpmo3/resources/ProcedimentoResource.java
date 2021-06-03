@@ -11,24 +11,24 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.chavesricardo.projetogpmo3.domain.Cirurgia;
-import com.chavesricardo.projetogpmo3.services.CirurgiaService;
+import com.chavesricardo.projetogpmo3.domain.Procedimento;
+import com.chavesricardo.projetogpmo3.services.ProcedimentoService;
 
 @RestController
-@RequestMapping(value="/cirurgias")
-public class CirurgiaResource {
+@RequestMapping(value="/procedimentos")
+public class ProcedimentoResource {
 	
 	@Autowired
-	private CirurgiaService service;
+	private ProcedimentoService service;
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
-	public ResponseEntity<Cirurgia> find(@PathVariable Integer id) {
-		Cirurgia obj = service.find(id);
+	public ResponseEntity<Procedimento> find(@PathVariable Integer id) {
+		Procedimento obj = service.find(id);
 		return ResponseEntity.ok().body(obj);
 	}
 	
 	@RequestMapping(method=RequestMethod.POST)
-	public ResponseEntity<Void> insert(@RequestBody Cirurgia obj){
+	public ResponseEntity<Void> insert(@RequestBody Procedimento obj){
 		obj = service.insert(obj);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
 				.path("/{id}").buildAndExpand(obj.getId()).toUri();
@@ -36,7 +36,7 @@ public class CirurgiaResource {
 	}
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.PUT)
-	public ResponseEntity<Void> update(@RequestBody Cirurgia obj, @PathVariable Integer id) {
+	public ResponseEntity<Void> update(@RequestBody Procedimento obj, @PathVariable Integer id) {
 		obj.setId(id);
 		obj = service.update(obj);
 		return ResponseEntity.noContent().build();
