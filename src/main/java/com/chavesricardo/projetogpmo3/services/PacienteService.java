@@ -1,5 +1,6 @@
 package com.chavesricardo.projetogpmo3.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,7 @@ public class PacienteService {
 	public Paciente find(Integer id) {
 		Optional<Paciente> obj = repo.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
-				"Objeto não encontrado! Id: " + id + ", Tipo: " + Paciente.class.getName()));
+				"Objeto Paciente não encontrado! Id: " + id + ", Tipo: " + Paciente.class.getName()));
 	}
 	
 	public Paciente insert(Paciente obj) {
@@ -41,6 +42,9 @@ public class PacienteService {
 		catch (DataIntegrityViolationException e) {
 			throw new DataIntegrityException("Não é possível excluir um paciente que possui cirurgias");
 		}
+	}
 	
+	public List<Paciente> findAll() {
+		return repo.findAll();
 	}
 }

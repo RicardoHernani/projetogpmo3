@@ -18,7 +18,7 @@ public class ProcedimentoService {
 	public Procedimento find(Integer id) {
 		Optional<Procedimento> obj = repo.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
-				"Objeto não encontrado! Id: " + id + ", Tipo: " + Procedimento.class.getName()));
+				"Objeto Procedimento não encontrado! Id: " + id + ", Tipo: " + Procedimento.class.getName()));
 	}
 	
 	public Procedimento insert(Procedimento obj) {

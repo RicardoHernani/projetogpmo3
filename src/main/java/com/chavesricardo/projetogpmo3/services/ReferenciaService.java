@@ -18,7 +18,7 @@ public class ReferenciaService {
 	public Referencia find(Integer id) {
 		Optional<Referencia> obj = repo.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
-				"Objeto não encontrado! Id: " + id + ", Tipo: " + Referencia.class.getName()));
+				"Objeto Referência não encontrado! Id: " + id + ", Tipo: " + Referencia.class.getName()));
 	}
 	
 }

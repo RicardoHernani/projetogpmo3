@@ -1,6 +1,8 @@
 package com.chavesricardo.projetogpmo3.resources;
 
 import java.net.URI;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.chavesricardo.projetogpmo3.domain.Paciente;
+import com.chavesricardo.projetogpmo3.dto.PacienteDTO;
 import com.chavesricardo.projetogpmo3.services.PacienteService;
 
 @RestController
@@ -25,7 +28,6 @@ public class PacienteResource {
 	public ResponseEntity<Paciente> find(@PathVariable Integer id) {
 		Paciente obj = service.find(id);
 		return ResponseEntity.ok().body(obj);
-	
 	}
 	
 	@RequestMapping(method=RequestMethod.POST)
@@ -48,4 +50,12 @@ public class PacienteResource {
 		service.delete(id);
 		return ResponseEntity.noContent().build();
 	}
+	
+	@RequestMapping(method=RequestMethod.GET)
+	public ResponseEntity<List<PacienteDTO>> findAll() {
+		 List<Paciente> list = service.findAll();
+		 List<PacienteDTO> listDto = list.stream().map(obj -> new PacienteDTO(obj)).collect(Collectors.toList());
+		 return ResponseEntity.ok().body(listDto);
+	}
+	
 }

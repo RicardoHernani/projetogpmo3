@@ -18,7 +18,7 @@ public class CirurgiaService {
 	public Cirurgia find(Integer id) {
 		Optional<Cirurgia> obj = repo.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
-				"Objeto não encontrado! Id: " + id + ", Tipo: " + Cirurgia.class.getName()));
+				"Objeto Cirurgia não encontrado! Id: " + id + ", Tipo: " + Cirurgia.class.getName()));
 	}
 	
 	public Cirurgia insert(Cirurgia obj) {
