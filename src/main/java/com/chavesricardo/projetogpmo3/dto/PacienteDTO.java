@@ -2,12 +2,17 @@ package com.chavesricardo.projetogpmo3.dto;
 
 import java.io.Serializable;
 
+import javax.validation.constraints.NotNull;
+
 import com.chavesricardo.projetogpmo3.domain.Paciente;
+
 
 public class PacienteDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private Integer id;
+	
+	@NotNull (message="Não pode ser nulo")
 	private Integer prontuario;
 	
 	public PacienteDTO() {

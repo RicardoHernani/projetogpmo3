@@ -8,6 +8,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import com.chavesricardo.projetogpmo3.domain.Paciente;
+import com.chavesricardo.projetogpmo3.dto.PacienteDTO;
 import com.chavesricardo.projetogpmo3.repositories.PacienteRepository;
 import com.chavesricardo.projetogpmo3.services.exceptions.DataIntegrityException;
 import com.chavesricardo.projetogpmo3.services.exceptions.ObjectNotFoundException;
@@ -46,5 +47,9 @@ public class PacienteService {
 	
 	public List<Paciente> findAll() {
 		return repo.findAll();
+	}
+	
+	public Paciente fromDTO(PacienteDTO objDto) {
+		return new Paciente(objDto.getId(), objDto.getProntuario());
 	}
 }
