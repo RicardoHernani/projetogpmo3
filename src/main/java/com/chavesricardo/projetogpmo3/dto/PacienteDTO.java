@@ -12,7 +12,7 @@ public class PacienteDTO implements Serializable {
 
 	private Integer id;
 	
-	@NotNull (message="Não pode ser nulo")
+	@NotNull (message="O número do prontuário é obrigatório!")
 	private Integer prontuario;
 	
 	public PacienteDTO() {
