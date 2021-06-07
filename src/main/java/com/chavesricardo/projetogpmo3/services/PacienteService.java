@@ -29,8 +29,9 @@ public class PacienteService {
 	}
 	
 	public Paciente insert(Paciente obj) {
-		obj.setId(null);
-		return repo.save(obj);
+		Paciente newObj = find(obj.getId());
+		updateData(newObj, obj);
+		return repo.save(newObj);
 	}
 	
 	public Paciente update(Paciente obj) {
@@ -58,6 +59,11 @@ public class PacienteService {
 	}
 	
 	public Paciente fromDTO(PacienteDTO objDto) {
-		throw new UnsupportedOperationException();
+		return new Paciente(objDto.getId(), objDto.getProntuario());
+	}
+	
+	private void updateData(Paciente newObj, Paciente obj) {
+		newObj.setId(obj.getId());
+		newObj.setProntuario(obj.getProntuario());
 	}
 }
