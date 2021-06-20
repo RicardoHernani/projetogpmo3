@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 import com.chavesricardo.projetogpmo3.domain.Cirurgia;
 import com.chavesricardo.projetogpmo3.dto.CirurgiaDTO;
 import com.chavesricardo.projetogpmo3.repositories.CirurgiaRepository;
-import com.chavesricardo.projetogpmo3.repositories.PacienteRepository;
 import com.chavesricardo.projetogpmo3.services.exceptions.ObjectNotFoundException;
 
 @Service
@@ -21,8 +20,8 @@ public class CirurgiaService {
 	@Autowired
 	private CirurgiaRepository repo;
 	
-	@Autowired
-	private PacienteRepository pacienteRepository;
+	/*@Autowired
+	private PacienteRepository pacienteRepository;*/
 	
 	public Cirurgia find(Integer id) {
 		Optional<Cirurgia> obj = repo.findById(id);
@@ -30,15 +29,16 @@ public class CirurgiaService {
 				"Objeto Cirurgia não encontrado! Id: " + id + ", Tipo: " + Cirurgia.class.getName()));
 	}
 	
-	public Cirurgia insert(Cirurgia obj) {
+	/*public Cirurgia insert(Cirurgia obj) {
 		Cirurgia newObj = find(obj.getId());
 		updateData(newObj, obj);
 		return repo.save(newObj);
-	}
+	}*/
 	
 	public Cirurgia update(Cirurgia obj) {
-		find(obj.getId());
-		return repo.save(obj);
+		Cirurgia newObj = find(obj.getId());
+		updateData(newObj, obj);
+		return repo.save(newObj);
 	}
 	
 	public void delete(Integer id) {
@@ -57,11 +57,11 @@ public class CirurgiaService {
 	
 	public Cirurgia fromDTO(CirurgiaDTO objDto) {
 		
-		return new Cirurgia(objDto.getId(), objDto.getData(), pacienteRepository.getOne(6));
+		return new Cirurgia(objDto.getId(), objDto.getData(), null);
 	}
 	
 	private void updateData(Cirurgia newObj, Cirurgia obj) {
 		newObj.setData(obj.getData());
-		
+	
 	}
 }
