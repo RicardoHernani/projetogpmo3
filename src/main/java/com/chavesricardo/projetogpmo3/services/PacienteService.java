@@ -28,15 +28,14 @@ public class PacienteService {
 				"Objeto Paciente não encontrado! Id: " + id + ", Tipo: " + Paciente.class.getName()));
 	}
 	
-	public Paciente insert(Paciente obj) {
-		Paciente newObj = find(obj.getId());
-		updateData(newObj, obj);
-		return repo.save(newObj);
+	public Paciente insert(Paciente obj) {	
+		return repo.save(obj);
 	}
 	
 	public Paciente update(Paciente obj) {
-		find(obj.getId());
-		return repo.save(obj);
+		Paciente newObj = find(obj.getId());
+		updateData(newObj, obj);
+		return repo.save(newObj);
 	}
 	
 	public void delete(Integer id) {
