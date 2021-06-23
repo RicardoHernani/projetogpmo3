@@ -32,15 +32,12 @@ public class CirurgiaService {
 		
 		for?
 		obj.setData(obj.getData());
-				
-		
+					
 		obj.
-		
-		
+	
 		obj = repo.save(obj);
 		
 	}*/
-	
 	
 	public Cirurgia update(Cirurgia obj) {
 		Cirurgia newObj = find(obj.getId());

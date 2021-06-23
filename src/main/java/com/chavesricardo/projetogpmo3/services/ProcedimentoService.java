@@ -13,26 +13,26 @@ import com.chavesricardo.projetogpmo3.services.exceptions.ObjectNotFoundExceptio
 public class ProcedimentoService {
 
 	@Autowired
-	private ProcedimentoRepository repo;
+	private ProcedimentoRepository procedimentoRepository;
 	
 	public Procedimento find(Integer id) {
-		Optional<Procedimento> obj = repo.findById(id);
+		Optional<Procedimento> obj = procedimentoRepository.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
 				"Objeto Procedimento não encontrado! Id: " + id + ", Tipo: " + Procedimento.class.getName()));
 	}
 	
 	public Procedimento insert(Procedimento obj) {
 		obj.setId(null);
-		return repo.save(obj);
+		return procedimentoRepository.save(obj);
 	}
 	
 	public Procedimento update(Procedimento obj) {
 		find(obj.getId());
-		return repo.save(obj);
+		return procedimentoRepository.save(obj);
 	}
 	
 	public void delete(Integer id) {
 		find(id);
-		repo.deleteById(id);
+		procedimentoRepository.deleteById(id);
 		}
 }

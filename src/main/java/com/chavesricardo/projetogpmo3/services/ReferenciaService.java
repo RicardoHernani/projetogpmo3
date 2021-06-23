@@ -16,16 +16,16 @@ import com.chavesricardo.projetogpmo3.services.exceptions.ObjectNotFoundExceptio
 public class ReferenciaService {
 
 	@Autowired
-	private ReferenciaRepository repo;
+	private ReferenciaRepository referenciaRepository;
 	
 	public Referencia find(Integer id) {
-		Optional<Referencia> obj = repo.findById(id);
+		Optional<Referencia> obj = referenciaRepository.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
 				"Objeto Referência não encontrado! Id: " + id + ", Tipo: " + Referencia.class.getName()));
 	}
 	
 	public Page<Referencia> findPage(Integer page, Integer linesPerPage, String orderBy, String direction) {
 		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
-		return repo.findAll(pageRequest);
+		return referenciaRepository.findAll(pageRequest);
 	}
 }
