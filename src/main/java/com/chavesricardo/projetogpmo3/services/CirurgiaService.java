@@ -18,41 +18,48 @@ import com.chavesricardo.projetogpmo3.services.exceptions.ObjectNotFoundExceptio
 public class CirurgiaService {
 
 	@Autowired
-	private CirurgiaRepository repo;
+	private CirurgiaRepository cirurgiaRepository;
 	
-	/*@Autowired
-	private PacienteRepository pacienteRepository;*/
 	
 	public Cirurgia find(Integer id) {
-		Optional<Cirurgia> obj = repo.findById(id);
+		Optional<Cirurgia> obj = cirurgiaRepository.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
 				"Objeto Cirurgia não encontrado! Id: " + id + ", Tipo: " + Cirurgia.class.getName()));
 	}
 	
 	/*public Cirurgia insert(Cirurgia obj) {
-		Cirurgia newObj = find(obj.getId());
-		updateData(newObj, obj);
-		return repo.save(newObj);
+		obj.setId(null);
+		
+		for?
+		obj.setData(obj.getData());
+				
+		
+		obj.
+		
+		
+		obj = repo.save(obj);
+		
 	}*/
+	
 	
 	public Cirurgia update(Cirurgia obj) {
 		Cirurgia newObj = find(obj.getId());
 		updateData(newObj, obj);
-		return repo.save(newObj);
+		return cirurgiaRepository.save(newObj);
 	}
 	
 	public void delete(Integer id) {
 		find(id);
-		repo.deleteById(id);
+		cirurgiaRepository.deleteById(id);
 		}
 	
 	public List<Cirurgia> findAll() {
-		return repo.findAll();
+		return cirurgiaRepository.findAll();
 	}
 	
 	public Page<Cirurgia> findPage(Integer page, Integer linesPerPage, String orderBy, String direction) {
 		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
-		return repo.findAll(pageRequest);
+		return cirurgiaRepository.findAll(pageRequest);
 	}
 	
 	public Cirurgia fromDTO(CirurgiaDTO objDto) {

@@ -32,7 +32,7 @@ public class CirurgiaResource {
 		return ResponseEntity.ok().body(obj);
 	}
 	
-	/*@RequestMapping(method=RequestMethod.POST)
+	/*@RequestMapping(method=RequestMethod.POST)               //fazer um CirurgiaNewDTO????
 	public ResponseEntity<Void> insert(@RequestBody Cirurgia obj){
 		obj = service.insert(obj);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
