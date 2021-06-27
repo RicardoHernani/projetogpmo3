@@ -8,10 +8,14 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.chavesricardo.projetogpmo3.domain.Cirurgia;
+import com.chavesricardo.projetogpmo3.domain.Procedimento;
 import com.chavesricardo.projetogpmo3.dto.CirurgiaDTO;
 import com.chavesricardo.projetogpmo3.repositories.CirurgiaRepository;
+import com.chavesricardo.projetogpmo3.repositories.PacienteRepository;
+import com.chavesricardo.projetogpmo3.repositories.ProcedimentoRepository;
 import com.chavesricardo.projetogpmo3.services.exceptions.ObjectNotFoundException;
 
 @Service
@@ -20,6 +24,11 @@ public class CirurgiaService {
 	@Autowired
 	private CirurgiaRepository cirurgiaRepository;
 	
+	@Autowired
+	private ProcedimentoRepository procedimentoRepository;
+	
+	@Autowired
+	private PacienteRepository repo;
 	
 	public Cirurgia find(Integer id) {
 		Optional<Cirurgia> obj = cirurgiaRepository.findById(id);
@@ -27,17 +36,24 @@ public class CirurgiaService {
 				"Objeto Cirurgia não encontrado! Id: " + id + ", Tipo: " + Cirurgia.class.getName()));
 	}
 	
-	/*public Cirurgia insert(Cirurgia obj) {
+	@Transactional
+	public Cirurgia insert(Cirurgia obj){
 		obj.setId(null);
-		
-		for?
 		obj.setData(obj.getData());
-					
-		obj.
 	
-		obj = repo.save(obj);
 		
-	}*/
+			for (Procedimento proc: obj.getProcedimentos()) {
+				proc.setTipo(proc.getTipo());
+				proc.setPremio(proc.getPremio());
+				proc.setCirurgia(obj);
+				procedimentoRepository.save(proc);
+			}
+		
+		obj = cirurgiaRepository.save(obj);
+		
+		return obj;
+		
+	}
 	
 	public Cirurgia update(Cirurgia obj) {
 		Cirurgia newObj = find(obj.getId());

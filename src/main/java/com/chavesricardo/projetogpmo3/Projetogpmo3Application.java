@@ -1,4 +1,3 @@
-
 package com.chavesricardo.projetogpmo3;
 
 import java.text.SimpleDateFormat;
@@ -56,6 +55,7 @@ public class Projetogpmo3Application implements CommandLineRunner {
 		Paciente pct4 = new Paciente(null, 44444444);
 		Paciente pct5 = new Paciente(null, 55555555);
 		Paciente pct6 = new Paciente(null, 66666666);
+		Paciente pct7 = new Paciente(null, 77777777);
 
 		Cirurgia cir1 = new Cirurgia(null, new java.util.Date(sdf.parse("20/02/2020").getTime()), pct1);
 		Cirurgia cir2 = new Cirurgia(null, new java.util.Date(sdf.parse("26/05/2021").getTime()), pct1);
@@ -87,10 +87,9 @@ public class Projetogpmo3Application implements CommandLineRunner {
 		Procedimento pro10 = new Procedimento(null, 1, 2, ref8, cir9);
 
 		referenciaRepository.saveAll(Arrays.asList(ref1, ref2, ref3, ref4, ref5, ref6, ref7, ref8, ref9, ref10));
-		pacienteRepository.saveAll(Arrays.asList(pct1, pct2, pct3, pct4, pct5, pct6));
+		pacienteRepository.saveAll(Arrays.asList(pct1, pct2, pct3, pct4, pct5, pct6, pct7));
 		cirurgiaRepository.saveAll(Arrays.asList(cir1, cir2, cir3, cir4, cir5, cir6, cir7, cir8, cir9));
 		procedimentoRepository.saveAll(Arrays.asList(pro1, pro2, pro3, pro4, pro5, pro6, pro7, pro8, pro9, pro10));
 	
 	}
-
 }
