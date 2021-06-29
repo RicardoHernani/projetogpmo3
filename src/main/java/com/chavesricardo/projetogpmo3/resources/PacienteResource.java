@@ -34,9 +34,17 @@ public class PacienteResource {
 		return ResponseEntity.ok().body(obj);
 	}
 	
-	@RequestMapping(method=RequestMethod.POST)
-	public ResponseEntity<Void> insert(@Valid @RequestBody PacienteDTO objDto){
+	@RequestMapping(value="/isolado", method=RequestMethod.POST)
+	public ResponseEntity<Void> insertIsolado(@Valid @RequestBody PacienteDTO objDto){
 		Paciente obj = service.fromDTO(objDto);
+		obj = service.insert(obj);
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
+				.path("/{id}").buildAndExpand(obj.getId()).toUri();
+		return ResponseEntity.created(uri).build();
+	}
+	
+	@RequestMapping(method=RequestMethod.POST)
+	public ResponseEntity<Void> insert(@Valid @RequestBody Paciente obj){
 		obj = service.insert(obj);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
 				.path("/{id}").buildAndExpand(obj.getId()).toUri();

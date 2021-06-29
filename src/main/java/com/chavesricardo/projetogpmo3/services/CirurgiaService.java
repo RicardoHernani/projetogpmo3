@@ -14,7 +14,6 @@ import com.chavesricardo.projetogpmo3.domain.Cirurgia;
 import com.chavesricardo.projetogpmo3.domain.Procedimento;
 import com.chavesricardo.projetogpmo3.dto.CirurgiaDTO;
 import com.chavesricardo.projetogpmo3.repositories.CirurgiaRepository;
-import com.chavesricardo.projetogpmo3.repositories.PacienteRepository;
 import com.chavesricardo.projetogpmo3.repositories.ProcedimentoRepository;
 import com.chavesricardo.projetogpmo3.services.exceptions.ObjectNotFoundException;
 
@@ -27,9 +26,6 @@ public class CirurgiaService {
 	@Autowired
 	private ProcedimentoRepository procedimentoRepository;
 	
-	@Autowired
-	private PacienteRepository repo;
-	
 	public Cirurgia find(Integer id) {
 		Optional<Cirurgia> obj = cirurgiaRepository.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
@@ -40,7 +36,7 @@ public class CirurgiaService {
 	public Cirurgia insert(Cirurgia obj){
 		obj.setId(null);
 		obj.setData(obj.getData());
-	
+		
 		
 			for (Procedimento proc: obj.getProcedimentos()) {
 				proc.setTipo(proc.getTipo());
