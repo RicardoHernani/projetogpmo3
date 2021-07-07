@@ -34,8 +34,8 @@ public class PacienteResource {
 		return ResponseEntity.ok().body(obj);
 	}
 	
-	@RequestMapping(value="/isolado", method=RequestMethod.POST)
-	public ResponseEntity<Void> insertIsolado(@Valid @RequestBody PacienteDTO objDto){
+	@RequestMapping(value="/prontuario", method=RequestMethod.POST)
+	public ResponseEntity<Void> insertProntuario(@Valid @RequestBody PacienteDTO objDto){
 		Paciente obj = service.fromDTO(objDto);
 		obj = service.insert(obj);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()

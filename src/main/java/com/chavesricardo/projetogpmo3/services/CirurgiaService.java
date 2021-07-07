@@ -19,13 +19,19 @@ import com.chavesricardo.projetogpmo3.services.exceptions.ObjectNotFoundExceptio
 
 @Service
 public class CirurgiaService {
-
+	
 	@Autowired
 	private CirurgiaRepository cirurgiaRepository;
 	
 	@Autowired
-	private ProcedimentoRepository procedimentoRepository;
+	private CirurgiaService cirurgiaService;
 	
+	@Autowired
+	private PacienteService pacienteService;
+	
+	@Autowired
+	private ProcedimentoRepository procedimentoRepository;
+
 	public Cirurgia find(Integer id) {
 		Optional<Cirurgia> obj = cirurgiaRepository.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
@@ -56,6 +62,24 @@ public class CirurgiaService {
 		updateData(newObj, obj);
 		return cirurgiaRepository.save(newObj);
 	}
+	
+	public Cirurgia update2(Cirurgia obj) {
+		find(obj.getId());
+		obj.setData(cirurgiaService.find(obj.getId()).getData());
+		obj.setPaciente(pacienteService.find(obj.getId()));
+		
+		for (Procedimento proc: obj.getProcedimentos()) {
+						
+			proc.setTipo(proc.getTipo());
+			proc.setPremio(proc.getPremio());
+				
+			proc.setCirurgia(obj);
+			procedimentoRepository.save(proc);
+		}	
+		
+		obj = cirurgiaRepository.save(obj);
+		return obj;	
+}
 	
 	public void delete(Integer id) {
 		find(id);

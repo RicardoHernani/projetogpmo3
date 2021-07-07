@@ -39,7 +39,7 @@ public class PacienteService {
 				"Objeto Paciente não encontrado! Id: " + id + ", Tipo: " + Paciente.class.getName()));
 	}
 	
-	public Paciente insertIsolado(Paciente obj) {	
+	public Paciente insertProntuario(Paciente obj) {	
 		return repo.save(obj);
 	}
 	
@@ -98,4 +98,5 @@ public class PacienteService {
 		newObj.setId(obj.getId());
 		newObj.setProntuario(obj.getProntuario());
 	}
+	
 }
