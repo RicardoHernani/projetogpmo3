@@ -26,6 +26,8 @@ public class Cirurgia implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	
+	private Integer id2;
+	
 	@JsonFormat(pattern="dd/MM/yyyy")
 	private Date data;
 	
@@ -54,6 +56,14 @@ public class Cirurgia implements Serializable {
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	public Integer getId2() {
+		return id2;
+	}
+
+	public void setId2(Integer id2) {
+		this.id2 = id2;
 	}
 
 	public Date getData() {

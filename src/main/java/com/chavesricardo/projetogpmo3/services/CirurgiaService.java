@@ -31,6 +31,9 @@ public class CirurgiaService {
 	
 	@Autowired
 	private ProcedimentoRepository procedimentoRepository;
+	
+	@Autowired
+	private ProcedimentoService procedimentoService;
 
 	public Cirurgia find(Integer id) {
 		Optional<Cirurgia> obj = cirurgiaRepository.findById(id);
@@ -64,20 +67,23 @@ public class CirurgiaService {
 	}
 	
 	public Cirurgia update2(Cirurgia obj) {
-		find(obj.getId());
+		find(obj.getId());	
+		obj.setPaciente(pacienteService.find(obj.getId2()));  
 		obj.setData(cirurgiaService.find(obj.getId()).getData());
-		obj.setPaciente(pacienteService.find(obj.getId()));
 		
+		for(Procedimento proced: obj.getProcedimentos()) {
+			proced.setTipo(procedimentoService.find(proced.getTipo()).getTipo());
+			proced.setPremio(procedimentoService.find(proced.getPremio()).getPremio());		
+		}
+			
 		for (Procedimento proc: obj.getProcedimentos()) {
-						
 			proc.setTipo(proc.getTipo());
 			proc.setPremio(proc.getPremio());
-				
 			proc.setCirurgia(obj);
 			procedimentoRepository.save(proc);
-		}	
+		}
 		
-		obj = cirurgiaRepository.save(obj);
+		obj = cirurgiaRepository.save(obj);	
 		return obj;	
 }
 	
@@ -104,4 +110,5 @@ public class CirurgiaService {
 		newObj.setData(obj.getData());
 	
 	}
+	
 }
