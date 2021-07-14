@@ -21,11 +21,11 @@ public class ReferenciaService {
 	public Referencia find(Integer id) {
 		Optional<Referencia> obj = referenciaRepository.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
-				"Objeto Referência não encontrado! Id: " + id + ", Tipo: " + Referencia.class.getName()));
+				"Objeto Referência não encontrado! Código: " + id + ", Tipo: " + Referencia.class.getName()));
 	}
 	
-	public Page<Referencia> findPage(Integer page, Integer linesPerPage, String orderBy, String direction) {
+	public Page<Referencia> search(String descricao, Integer page, Integer linesPerPage, String orderBy, String direction) {
 		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
-		return referenciaRepository.findAll(pageRequest);
+		return referenciaRepository.findByDescricaoContainingIgnoreCase(descricao, pageRequest);
 	}
 }

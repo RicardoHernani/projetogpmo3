@@ -83,6 +83,4 @@ public class Referencia implements Serializable {
 		return true;
 	}
 	
-	
-	
 }

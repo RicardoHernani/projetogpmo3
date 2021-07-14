@@ -34,6 +34,7 @@ public class ProcedimentoService {
 		return obj;
 	}
 	
+	@Transactional
 	public Procedimento update(Procedimento obj) {
 		find(obj.getId());
 		return procedimentoRepository.save(obj);

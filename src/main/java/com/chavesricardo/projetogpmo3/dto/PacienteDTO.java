@@ -39,6 +39,4 @@ public class PacienteDTO implements Serializable {
 		this.prontuario = prontuario;
 	}
 	
-	
-	
 }

@@ -38,5 +38,4 @@ public class CirurgiaDTO implements Serializable {
 		this.data = data;
 	}
 
-	
 }

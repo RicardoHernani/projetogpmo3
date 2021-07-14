@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.chavesricardo.projetogpmo3.domain.Referencia;
+import com.chavesricardo.projetogpmo3.resources.utils.URL;
 import com.chavesricardo.projetogpmo3.services.ReferenciaService;
 
 @RestController
@@ -25,13 +26,16 @@ public class ReferenciaResource {
 		return ResponseEntity.ok().body(obj);
 	}
 	
-	@RequestMapping(value="/page", method=RequestMethod.GET)
+	@RequestMapping(method=RequestMethod.GET)
 	public ResponseEntity<Page<Referencia>> findPage(
+			@RequestParam(value="descricao", defaultValue="") String descricao,
 			@RequestParam(value="page", defaultValue="0") Integer page,
 			@RequestParam(value="linesPerPage", defaultValue="24") Integer linesPerPage,
-			@RequestParam(value="orderBy", defaultValue="codigo") String orderBy,
+			@RequestParam(value="orderBy", defaultValue="descricao") String orderBy,
 			@RequestParam(value="direction", defaultValue="ASC") String direction) {
-		Page<Referencia> list = service.findPage(page, linesPerPage, orderBy, direction);
+		String descricaoDecoded = URL.decodeParam(descricao);
+		Page<Referencia> list = service.search(descricaoDecoded, page, linesPerPage, orderBy, direction);
 		return ResponseEntity.ok().body(list);
 	}
+	
 }

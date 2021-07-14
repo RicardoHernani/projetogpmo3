@@ -87,12 +87,12 @@ public class CirurgiaService {
 		
 		obj = cirurgiaRepository.save(obj);	
 		return obj;	
-}
+	}
 	
 	public void delete(Integer id) {
 		find(id);
 		cirurgiaRepository.deleteById(id);
-		}
+	}
 	
 	public List<Cirurgia> findAll() {
 		return cirurgiaRepository.findAll();
@@ -104,13 +104,11 @@ public class CirurgiaService {
 	}
 	
 	public Cirurgia fromDTO(CirurgiaDTO objDto) {
-		
 		return new Cirurgia(objDto.getId(), objDto.getData(), null);
 	}
 	
 	private void updateData(Cirurgia newObj, Cirurgia obj) {
 		newObj.setData(obj.getData());
-	
 	}
 	
 }
