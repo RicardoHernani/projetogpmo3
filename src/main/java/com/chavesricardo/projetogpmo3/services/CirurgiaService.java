@@ -60,12 +60,14 @@ public class CirurgiaService {
 		
 	}
 	
+	@Transactional
 	public Cirurgia update(Cirurgia obj) {
 		Cirurgia newObj = find(obj.getId());
 		updateData(newObj, obj);
 		return cirurgiaRepository.save(newObj);
 	}
 	
+	@Transactional
 	public Cirurgia update2(Cirurgia obj) {
 		find(obj.getId());	
 		obj.setPaciente(pacienteService.find(obj.getId2()));  
