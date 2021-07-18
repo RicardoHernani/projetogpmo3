@@ -26,17 +26,17 @@ import com.chavesricardo.projetogpmo3.services.CirurgiaService;
 public class CirurgiaResource {
 	
 	@Autowired
-	private CirurgiaService service;
+	private CirurgiaService cirurgiaService;
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
 	public ResponseEntity<Cirurgia> find(@PathVariable Integer id) {
-		Cirurgia obj = service.find(id);
+		Cirurgia obj = cirurgiaService.find(id);
 		return ResponseEntity.ok().body(obj);
 	}
 	
 	@RequestMapping(method=RequestMethod.POST)              
 	public ResponseEntity<Void> insert(@RequestBody Cirurgia obj){
-		obj = service.insert(obj);
+		obj = cirurgiaService.insert(obj);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
 				.path("/{id}").buildAndExpand(obj.getId()).toUri();
 		return ResponseEntity.created(uri).build();
@@ -44,28 +44,28 @@ public class CirurgiaResource {
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.PUT)
 	public ResponseEntity<Void> update(@Valid @RequestBody CirurgiaDTO objDto, @PathVariable Integer id) {
-		Cirurgia obj = service.fromDTO(objDto);
+		Cirurgia obj = cirurgiaService.fromDTO(objDto);
 		obj.setId(id);
-		obj = service.update(obj);
+		obj = cirurgiaService.update(obj);
 		return ResponseEntity.noContent().build();
 	}
 	
 	@RequestMapping(value="/{id}/pacientes/{id2}", method=RequestMethod.PUT)
 	public ResponseEntity<Void> update2(@RequestBody Cirurgia obj, @PathVariable Integer id, @PathVariable Integer id2) {
 		obj.setId(id);		
-		obj = service.update2(obj);
+		obj = cirurgiaService.update2(obj);
 		return ResponseEntity.noContent().build();
 	}
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.DELETE)
 	public ResponseEntity<Void> delete(@PathVariable Integer id) {
-		service.delete(id);
+		cirurgiaService.delete(id);
 		return ResponseEntity.noContent().build();
 	}
 	
 	@RequestMapping(method=RequestMethod.GET)
 	public ResponseEntity<List<CirurgiaDTO>> findAll() {
-		 List<Cirurgia> list = service.findAll();
+		 List<Cirurgia> list = cirurgiaService.findAll();
 		 List<CirurgiaDTO> listDto = list.stream().map(obj -> new CirurgiaDTO(obj)).collect(Collectors.toList());
 		 return ResponseEntity.ok().body(listDto);
 	}
@@ -76,7 +76,7 @@ public class CirurgiaResource {
 			@RequestParam(value="linesPerPage", defaultValue="24") Integer linesPerPage,
 			@RequestParam(value="orderBy", defaultValue="data") String orderBy,
 			@RequestParam(value="direction", defaultValue="ASC") String direction) {
-		Page<Cirurgia> list = service.findPage(page, linesPerPage, orderBy, direction);
+		Page<Cirurgia> list = cirurgiaService.findPage(page, linesPerPage, orderBy, direction);
 		Page<CirurgiaDTO> listDto = list.map(obj -> new CirurgiaDTO(obj));
 		return ResponseEntity.ok().body(listDto);
 	}

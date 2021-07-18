@@ -45,8 +45,7 @@ public class CirurgiaService {
 	public Cirurgia insert(Cirurgia obj){
 		obj.setId(null);
 		obj.setData(obj.getData());
-		
-		
+			
 			for (Procedimento proc: obj.getProcedimentos()) {
 				proc.setTipo(proc.getTipo());
 				proc.setPremio(proc.getPremio());

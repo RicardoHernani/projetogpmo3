@@ -18,11 +18,11 @@ import com.chavesricardo.projetogpmo3.services.ReferenciaService;
 public class ReferenciaResource {
 	
 	@Autowired
-	private ReferenciaService service;
+	private ReferenciaService referenciaService;
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
 	public ResponseEntity<Referencia> find(@PathVariable Integer id) {
-		Referencia obj = service.find(id);
+		Referencia obj = referenciaService.find(id);
 		return ResponseEntity.ok().body(obj);
 	}
 	
@@ -34,7 +34,7 @@ public class ReferenciaResource {
 			@RequestParam(value="orderBy", defaultValue="descricao") String orderBy,
 			@RequestParam(value="direction", defaultValue="ASC") String direction) {
 		String descricaoDecoded = URL.decodeParam(descricao);
-		Page<Referencia> list = service.search(descricaoDecoded, page, linesPerPage, orderBy, direction);
+		Page<Referencia> list = referenciaService.search(descricaoDecoded, page, linesPerPage, orderBy, direction);
 		return ResponseEntity.ok().body(list);
 	}
 	

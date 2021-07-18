@@ -19,17 +19,17 @@ import com.chavesricardo.projetogpmo3.services.ProcedimentoService;
 public class ProcedimentoResource {
 	
 	@Autowired
-	private ProcedimentoService service;
+	private ProcedimentoService procedimentoService;
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
 	public ResponseEntity<Procedimento> find(@PathVariable Integer id) {
-		Procedimento obj = service.find(id);
+		Procedimento obj = procedimentoService.find(id);
 		return ResponseEntity.ok().body(obj);
 	}
 	
 	@RequestMapping(method=RequestMethod.POST)
 	public ResponseEntity<Void> insert(@RequestBody Procedimento obj){
-		obj = service.insert(obj);
+		obj = procedimentoService.insert(obj);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
 				.path("/{id}").buildAndExpand(obj.getId()).toUri();
 		return ResponseEntity.created(uri).build();
@@ -38,13 +38,13 @@ public class ProcedimentoResource {
 	@RequestMapping(value="/{id}", method=RequestMethod.PUT)
 	public ResponseEntity<Void> update(@RequestBody Procedimento obj, @PathVariable Integer id) {
 		obj.setId(id);
-		obj = service.update(obj);
+		obj = procedimentoService.update(obj);
 		return ResponseEntity.noContent().build();
 	}
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.DELETE)
 	public ResponseEntity<Void> delete(@PathVariable Integer id) {
-		service.delete(id);
+		procedimentoService.delete(id);
 		return ResponseEntity.noContent().build();
 	}
 	
