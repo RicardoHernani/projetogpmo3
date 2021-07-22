@@ -39,6 +39,13 @@ public class PacienteService {
 				"Objeto Paciente não encontrado! Id: " + id + ", Tipo: " + Paciente.class.getName()));
 	}
 	
+	public Page<Paciente> search(String data, String data1, Integer page, Integer linesPerPage, String orderBy, String direction) {
+		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
+		
+		
+		return repo.search(data, data1, pageRequest);
+	}
+
 	public Paciente insertProntuario(Paciente obj) {	
 		return repo.save(obj);
 	}

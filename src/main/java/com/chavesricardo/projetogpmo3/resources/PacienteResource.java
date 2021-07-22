@@ -34,6 +34,18 @@ public class PacienteResource {
 		return ResponseEntity.ok().body(obj);
 	}
 	
+	@RequestMapping(value="/datas", method=RequestMethod.GET)
+	public ResponseEntity<Page<Paciente>> findPage(
+			@RequestParam(value="data", defaultValue="") String data, //Parâmetros de URL são sempre Strings
+			@RequestParam(value="data1", defaultValue="") String data1,     //Parâmetros de URL são sempre Strings
+			@RequestParam(value="page", defaultValue="0") Integer page,
+			@RequestParam(value="linesPerPage", defaultValue="24") Integer linesPerPage,
+			@RequestParam(value="orderBy", defaultValue="prontuario") String orderBy,
+			@RequestParam(value="direction", defaultValue="ASC") String direction) {
+		Page<Paciente> list = service.search(data, data1, page, linesPerPage, orderBy, direction);
+		return ResponseEntity.ok().body(list);
+	}
+	
 	@RequestMapping(value="/prontuario", method=RequestMethod.POST)
 	public ResponseEntity<Void> insertProntuario(@Valid @RequestBody PacienteDTO objDto){
 		Paciente obj = service.fromDTO(objDto);
