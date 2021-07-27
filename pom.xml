@@ -65,6 +65,17 @@
 			<artifactId>mysql-connector-java</artifactId>
 		</dependency>
 		
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt</artifactId>
+			<version>0.7.0</version>
+		</dependency>
+		
 	</dependencies>
 	
 	
@@ -83,15 +94,9 @@
       						<source>1.8</source>
       						<target>1.8</target>
    						</configuration>
-			</plugin>
-			
-		</plugins>
-		
-		
+			</plugin>	
+		</plugins>	
 	</build>
-	
-	
-
 </project>
 
 
