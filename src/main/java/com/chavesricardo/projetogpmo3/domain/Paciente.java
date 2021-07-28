@@ -8,7 +8,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Paciente implements Serializable {
@@ -23,13 +27,19 @@ public class Paciente implements Serializable {
 	@OneToMany(mappedBy="paciente")
 	private List<Cirurgia> cirurgias = new ArrayList<>();
 	
+	@JsonIgnore
+	@ManyToOne
+	@JoinColumn(name="usuario_id")
+	private Usuario usuario;
+	
 	public Paciente() {
 	}
 
-	public Paciente(Integer id, Integer registro) {
+	public Paciente(Integer id, Integer prontuario, Usuario usuario) {
 		super();
 		this.id = id;
-		this.prontuario = registro;
+		this.prontuario = prontuario;
+		this.usuario = usuario;
 	}
 	
 	public Integer getId() {
