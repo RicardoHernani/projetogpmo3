@@ -94,6 +94,16 @@ public class DBService {
 		Procedimento pro8 = new Procedimento(null, 1, 1, ref3, cir7);
 		Procedimento pro9 = new Procedimento(null, 1, 2, ref6, cir8);
 		Procedimento pro10 = new Procedimento(null, 1, 2, ref8, cir9);
+		
+		cir1.getProcedimentos().addAll(Arrays.asList(pro1, pro2));
+		cir2.getProcedimentos().addAll(Arrays.asList(pro3));
+		cir3.getProcedimentos().addAll(Arrays.asList(pro4));
+		cir4.getProcedimentos().addAll(Arrays.asList(pro5));
+		cir5.getProcedimentos().addAll(Arrays.asList(pro6));
+		cir6.getProcedimentos().addAll(Arrays.asList(pro7));
+		cir7.getProcedimentos().addAll(Arrays.asList(pro8));
+		cir8.getProcedimentos().addAll(Arrays.asList(pro9));
+		cir9.getProcedimentos().addAll(Arrays.asList(pro10));
 
 		referenciaRepository.saveAll(Arrays.asList(ref1, ref2, ref3, ref4, ref5, ref6, ref7, ref8, ref9, ref10));
 		usuarioRepository.saveAll(Arrays.asList(usu1, usu2, usu3, usu4, usu5));

@@ -9,6 +9,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
+import com.chavesricardo.projetogpmo3.domain.Paciente;
 import com.chavesricardo.projetogpmo3.domain.Usuario;
 import com.chavesricardo.projetogpmo3.repositories.UsuarioRepository;
 import com.chavesricardo.projetogpmo3.services.exceptions.DataIntegrityException;
@@ -24,6 +25,11 @@ public class UsuarioService {
 		Optional<Usuario> obj = usuarioRepository.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
 				"Objeto usuário não encontrado! Id: " + id + ", Tipo: " + Usuario.class.getName()));
+	}
+	
+	public Page<Usuario> search(String dataInicial, String dataFinal, Integer page, Integer linesPerPage, String orderBy, String direction) {
+		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
+		return usuarioRepository.search(dataInicial, dataFinal, pageRequest);
 	}
 	
 	public Page<Usuario> findPage(Integer page, Integer linesPerPage, String orderBy, String direction) {

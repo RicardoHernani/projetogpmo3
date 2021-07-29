@@ -57,35 +57,16 @@ public class UsuarioResource {
 		return ResponseEntity.created(uri).build();
 	}
 	
-/*	
 	@RequestMapping(value="/datas", method=RequestMethod.GET)
-	public ResponseEntity<Page<Paciente>> findPage(
+	public ResponseEntity<Page<Usuario>> findPage(
 			@RequestParam(value="dataInicial", defaultValue="") String dataInicial, //Parâmetros de URL são sempre Strings
 			@RequestParam(value="dataFinal", defaultValue="") String dataFinal,     //Parâmetros de URL são sempre Strings
 			@RequestParam(value="page", defaultValue="0") Integer page,
 			@RequestParam(value="linesPerPage", defaultValue="24") Integer linesPerPage,
-			@RequestParam(value="orderBy", defaultValue="prontuario") String orderBy,
+			@RequestParam(value="orderBy", defaultValue="usuario") String orderBy,
 			@RequestParam(value="direction", defaultValue="ASC") String direction) {
-		Page<Paciente> list = service.search(dataInicial, dataFinal, page, linesPerPage, orderBy, direction);
+		Page<Usuario> list = usuarioService.search(dataInicial, dataFinal, page, linesPerPage, orderBy, direction);
 		return ResponseEntity.ok().body(list);
 	}
-	
-	@RequestMapping(value="/prontuario", method=RequestMethod.POST)
-	public ResponseEntity<Void> insertProntuario(@Valid @RequestBody PacienteDTO objDto){
-		Paciente obj = service.fromDTO(objDto);
-		obj = service.insert(obj);
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
-				.path("/{id}").buildAndExpand(obj.getId()).toUri();
-		return ResponseEntity.created(uri).build();
-	}
-		
-	@RequestMapping(value="/{id}", method=RequestMethod.PUT)
-	public ResponseEntity<Void> update(@Valid @RequestBody PacienteDTO objDto, @PathVariable Integer id) {
-		Paciente obj = service.fromDTO(objDto);
-		obj.setId(id);
-		obj = service.update(obj);
-		return ResponseEntity.noContent().build();
-	}
-	
-	*/
+
 }
