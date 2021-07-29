@@ -3,6 +3,7 @@ package com.chavesricardo.projetogpmo3.services;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.chavesricardo.projetogpmo3.domain.Usuario;
 import com.chavesricardo.projetogpmo3.repositories.UsuarioRepository;
+import com.chavesricardo.projetogpmo3.services.exceptions.DataIntegrityException;
 import com.chavesricardo.projetogpmo3.services.exceptions.ObjectNotFoundException;
 
 @Service
@@ -28,5 +30,14 @@ public class UsuarioService {
 		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
 		return usuarioRepository.findAll(pageRequest);
 	}
-	
+
+	public void delete(Integer id) {
+		find(id);
+		try {
+			usuarioRepository.deleteById(id);
+		}
+		catch (DataIntegrityViolationException e) {
+			throw new DataIntegrityException("Não é possível excluir um usuário que possui pacientes");
+		}
+	}
 }

@@ -37,6 +37,12 @@ public class UsuarioResource {
 		return ResponseEntity.ok().body(listDto);
 	}
 	
+	@RequestMapping(value="/{id}", method=RequestMethod.DELETE)
+	public ResponseEntity<Void> delete(@PathVariable Integer id) {
+		usuarioService.delete(id);
+		return ResponseEntity.noContent().build();
+	}
+	
 	
 /*	
 	@RequestMapping(value="/datas", method=RequestMethod.GET)
@@ -75,13 +81,6 @@ public class UsuarioResource {
 		obj = service.update(obj);
 		return ResponseEntity.noContent().build();
 	}
-	
-	@RequestMapping(value="/{id}", method=RequestMethod.DELETE)
-	public ResponseEntity<Void> delete(@PathVariable Integer id) {
-		service.delete(id);
-		return ResponseEntity.noContent().build();
-	}
-	
 	
 	*/
 }
