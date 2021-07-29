@@ -26,6 +26,7 @@ public class Cirurgia implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	
+	
 	private Integer id2;
 	
 	@JsonFormat(pattern="dd/MM/yyyy")
