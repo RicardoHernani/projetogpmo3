@@ -23,14 +23,13 @@ public class Paciente implements Serializable {
 	private Integer id;
 	private Integer prontuario;
 	
-	
-	@OneToMany(mappedBy="paciente")
-	private List<Cirurgia> cirurgias = new ArrayList<>();
-	
 	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="usuario_id")
 	private Usuario usuario;
+	
+	@OneToMany(mappedBy="paciente")
+	private List<Cirurgia> cirurgias = new ArrayList<>();
 	
 	public Paciente() {
 	}

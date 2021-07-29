@@ -97,9 +97,11 @@ public class PacienteService {
 		return repo.findAll(pageRequest);
 	}
 	
+	/*
 	public Paciente fromDTO(PacienteDTO objDto) {
 		return new Paciente(objDto.getId(), objDto.getProntuario());
 	}
+	*/
 	
 	private void updateData(Paciente newObj, Paciente obj) {
 		newObj.setId(obj.getId());

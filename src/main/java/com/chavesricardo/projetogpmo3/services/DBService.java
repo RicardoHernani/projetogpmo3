@@ -11,10 +11,12 @@ import com.chavesricardo.projetogpmo3.domain.Cirurgia;
 import com.chavesricardo.projetogpmo3.domain.Paciente;
 import com.chavesricardo.projetogpmo3.domain.Procedimento;
 import com.chavesricardo.projetogpmo3.domain.Referencia;
+import com.chavesricardo.projetogpmo3.domain.Usuario;
 import com.chavesricardo.projetogpmo3.repositories.CirurgiaRepository;
 import com.chavesricardo.projetogpmo3.repositories.PacienteRepository;
 import com.chavesricardo.projetogpmo3.repositories.ProcedimentoRepository;
 import com.chavesricardo.projetogpmo3.repositories.ReferenciaRepository;
+import com.chavesricardo.projetogpmo3.repositories.UsuarioRepository;
 
 @Service
 public class DBService {
@@ -27,6 +29,8 @@ public class DBService {
 	private ProcedimentoRepository procedimentoRepository;
 	@Autowired
 	private ReferenciaRepository referenciaRepository;
+	@Autowired
+	private UsuarioRepository usuarioRepository;
 	
 	public void instantiateTestDatabase() throws ParseException {
 		
@@ -43,13 +47,24 @@ public class DBService {
 		Referencia ref9 = new Referencia(31201113, "Prostatovesiculectomia radical", 41.67, 443.25);
 		Referencia ref10 = new Referencia(30914070, "Linfadenectomia pélvica", 33.33, 249.79);
 
-		Paciente pct1 = new Paciente(null, 11111111);
-		Paciente pct2 = new Paciente(null, 22222222);
-		Paciente pct3 = new Paciente(null, 33333333);
-		Paciente pct4 = new Paciente(null, 44444444);
-		Paciente pct5 = new Paciente(null, 55555555);
-		Paciente pct6 = new Paciente(null, 66666666);
-		Paciente pct7 = new Paciente(null, 77777777);
+		Usuario uso1 = new Usuario(null, "Ricardo Hernani", "ricardohernani@yahoo.com.br", "12345");
+		Usuario uso2 = new Usuario(null, "Débora Fóscolo", "deborafoscolo@gmail.com", "123456");
+		Usuario uso3 = new Usuario(null, "Ana Garcia", "anagarcia@gmail.com", "1234567");
+		Usuario uso4 = new Usuario(null, "Vanessa Cristina", "vanessapatricia@gmail.com", "12345678");
+		Usuario uso5 = new Usuario(null, "Renata Chaves", "renatachaves@gmail.com", "123456789");	
+		
+		Paciente pct1 = new Paciente(null, 11111111, uso1);
+		Paciente pct2 = new Paciente(null, 22222222, uso2);
+		Paciente pct3 = new Paciente(null, 33333333, uso2);
+		Paciente pct4 = new Paciente(null, 44444444, uso3);
+		Paciente pct5 = new Paciente(null, 55555555, uso3);
+		Paciente pct6 = new Paciente(null, 66666666, uso3);
+		Paciente pct7 = new Paciente(null, 77777777, uso4);
+		
+		uso1.getPacientes().addAll(Arrays.asList(pct1));
+		uso2.getPacientes().addAll(Arrays.asList(pct2, pct3));
+		uso3.getPacientes().addAll(Arrays.asList(pct4, pct5, pct6));
+		uso5.getPacientes().addAll(Arrays.asList(pct7));
 
 		Cirurgia cir1 = new Cirurgia(null, new java.util.Date(sdf.parse("20/02/2020").getTime()), pct1);
 		Cirurgia cir2 = new Cirurgia(null, new java.util.Date(sdf.parse("26/05/2021").getTime()), pct1);
@@ -81,6 +96,7 @@ public class DBService {
 		Procedimento pro10 = new Procedimento(null, 1, 2, ref8, cir9);
 
 		referenciaRepository.saveAll(Arrays.asList(ref1, ref2, ref3, ref4, ref5, ref6, ref7, ref8, ref9, ref10));
+		usuarioRepository.saveAll(Arrays.asList(uso1, uso2, uso3, uso4, uso5));
 		pacienteRepository.saveAll(Arrays.asList(pct1, pct2, pct3, pct4, pct5, pct6, pct7));
 		cirurgiaRepository.saveAll(Arrays.asList(cir1, cir2, cir3, cir4, cir5, cir6, cir7, cir8, cir9));
 		procedimentoRepository.saveAll(Arrays.asList(pro1, pro2, pro3, pro4, pro5, pro6, pro7, pro8, pro9, pro10));
