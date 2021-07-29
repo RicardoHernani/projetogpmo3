@@ -13,8 +13,6 @@ import javax.persistence.OneToMany;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 @Entity
 public class Usuario implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -31,7 +29,6 @@ public class Usuario implements Serializable {
 	@Email(message="Email inválido")
 	private String email;
 	
-	@JsonIgnore
 	@NotEmpty(message="Preenchimento obrigatório")
 	private String senha;
 	

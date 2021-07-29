@@ -8,7 +8,7 @@ import com.chavesricardo.projetogpmo3.domain.Usuario;
 public class UsuarioDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	private Integer id;
+	//Exclui o id e deixei apenas nome, email e senha
 	
 	@NotEmpty(message="Preenchimento obrigatório")
 	private String nome;
@@ -24,18 +24,9 @@ public class UsuarioDTO implements Serializable {
 	}
 	
 	public UsuarioDTO(Usuario obj) {
-		id = obj.getId();
 		nome = obj.getNome();
 		email = obj.getEmail();
 		senha = obj.getSenha();
-	}
-
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
 	}
 
 	public String getNome() {

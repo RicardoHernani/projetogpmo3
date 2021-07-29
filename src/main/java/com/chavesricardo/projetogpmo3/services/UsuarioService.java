@@ -40,4 +40,11 @@ public class UsuarioService {
 			throw new DataIntegrityException("Não é possível excluir um usuário que possui pacientes");
 		}
 	}
+
+	public Usuario insert(Usuario obj) {
+		obj.setId(null);
+		return usuarioRepository.save(obj);
+	}
+	
+	
 }
