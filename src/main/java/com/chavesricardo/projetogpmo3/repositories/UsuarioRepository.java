@@ -12,11 +12,19 @@ import com.chavesricardo.projetogpmo3.domain.Usuario;
 @Repository
 public interface UsuarioRepository extends JpaRepository<Usuario, Integer> {
 
-	@Query(value = "SELECT * FROM USUARIO, PACIENTE WHERE PACIENTE.USUARIO_ID = USUARIO.ID AND (PACIENTE.CIRURGIA.DATA>= :dataInicial AND PACIENTE.CIRURGIA.DATA<= :dataFinal)", nativeQuery = true)
-	Page<Usuario> search(@Param("dataInicial") String dataInicial, @Param("dataFinal") String dataFinal, Pageable pageRequest);
+	@Query(value = "SELECT * FROM USUARIO, PACIENTE, CIRURGIA WHERE USUARIO.ID = PACIENTE.USUARIO_ID = CIRURGIA.PACIENTE_ID AND USUARIO.ID= :usuario AND (CIRURGIA.DATA BETWEEN :dataInicial AND :dataFinal)", nativeQuery = true)
+	Page<Usuario> search(@Param("usuario") String usuario, @Param("dataInicial") String dataInicial, @Param("dataFinal") String dataFinal, Pageable pageRequest);
 	
 }
 
 
+//	@Query(value = "SELECT * FROM USUARIO, PACIENTE, CIRURGIA WHERE (USUARIO.ID = PACIENTE.USUARIO_ID = CIRURGIA.PACIENTE_ID) AND (USUARIO.ID= :usuario) AND (CIRURGIA.DATA BETWEEN :dataInicial AND :dataFinal)", nativeQuery = true)
+//	@Query(value = "SELECT * FROM USUARIO, PACIENTE, CIRURGIA WHERE (USUARIO.ID = PACIENTE.USUARIO_ID = CIRURGIA.PACIENTE_ID) AND (USUARIO.ID= :usuario) AND (CIRURGIA.DATA>= :dataInicial AND CIRURGIA.DATA<= :dataFinal)", nativeQuery = true)
 
-
+/*
+SELECT *
+FROM  USUARIO, PACIENTE, CIRURGIA
+WHERE USUARIO.ID = PACIENTE.USUARIO_ID = CIRURGIA.PACIENTE_ID
+AND USUARIO.ID=1
+AND (CIRURGIA.DATA BETWEEN '2000-02-20' AND '2021-05-26')
+*/

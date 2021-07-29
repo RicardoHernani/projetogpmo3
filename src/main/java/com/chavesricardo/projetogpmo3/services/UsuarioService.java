@@ -27,9 +27,9 @@ public class UsuarioService {
 				"Objeto usuário não encontrado! Id: " + id + ", Tipo: " + Usuario.class.getName()));
 	}
 	
-	public Page<Usuario> search(String dataInicial, String dataFinal, Integer page, Integer linesPerPage, String orderBy, String direction) {
+	public Page<Usuario> search(String usuario, String dataInicial, String dataFinal, Integer page, Integer linesPerPage, String orderBy, String direction) {
 		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
-		return usuarioRepository.search(dataInicial, dataFinal, pageRequest);
+		return usuarioRepository.search(usuario, dataInicial, dataFinal, pageRequest);
 	}
 	
 	public Page<Usuario> findPage(Integer page, Integer linesPerPage, String orderBy, String direction) {
