@@ -12,7 +12,7 @@ import com.chavesricardo.projetogpmo3.domain.Usuario;
 @Repository
 public interface UsuarioRepository extends JpaRepository<Usuario, Integer> {
 
-	@Query(value = "SELECT * FROM USUARIO, PACIENTE, CIRURGIA WHERE USUARIO.ID = PACIENTE.USUARIO_ID = CIRURGIA.PACIENTE_ID AND USUARIO.ID= :usuario AND (CIRURGIA.DATA BETWEEN :dataInicial AND :dataFinal)", nativeQuery = true)
+	@Query(value = "SELECT * FROM USUARIO, PACIENTE, CIRURGIA WHERE USUARIO.ID = PACIENTE.USUARIO_ID AND PACIENTE.ID = CIRURGIA.PACIENTE_ID AND USUARIO.ID= :usuario AND (CIRURGIA.DATA BETWEEN :dataInicial AND :dataFinal)", nativeQuery = true)
 	Page<Usuario> search(@Param("usuario") String usuario, @Param("dataInicial") String dataInicial, @Param("dataFinal") String dataFinal, Pageable pageRequest);
 	
 }
@@ -24,7 +24,7 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Integer> {
 /*
 SELECT *
 FROM  USUARIO, PACIENTE, CIRURGIA
-WHERE USUARIO.ID = PACIENTE.USUARIO_ID = CIRURGIA.PACIENTE_ID
-AND USUARIO.ID=1
-AND (CIRURGIA.DATA BETWEEN '2000-02-20' AND '2021-05-26')
+WHERE USUARIO.ID=PACIENTE.USUARIO_ID AND PACIENTE.ID=CIRURGIA.PACIENTE_ID
+AND USUARIO.ID=3
+AND (CIRURGIA.DATA BETWEEN '2000-02-07' AND '2010-12-24')
 */

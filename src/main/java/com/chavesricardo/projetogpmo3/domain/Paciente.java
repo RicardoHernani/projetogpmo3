@@ -28,6 +28,7 @@ public class Paciente implements Serializable {
 	@JoinColumn(name="usuario_id")
 	private Usuario usuario;
 	
+	
 	@OneToMany(mappedBy="paciente")
 	private List<Cirurgia> cirurgias = new ArrayList<>();
 	

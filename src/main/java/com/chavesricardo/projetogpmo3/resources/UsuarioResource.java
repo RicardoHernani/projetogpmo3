@@ -64,10 +64,25 @@ public class UsuarioResource {
 			@RequestParam(value="dataFinal", defaultValue="") String dataFinal,     //Parâmetros de URL são sempre Strings
 			@RequestParam(value="page", defaultValue="0") Integer page,
 			@RequestParam(value="linesPerPage", defaultValue="24") Integer linesPerPage,
-			@RequestParam(value="orderBy", defaultValue="email") String orderBy,
+			@RequestParam(value="orderBy", defaultValue="data") String orderBy,
 			@RequestParam(value="direction", defaultValue="ASC") String direction) {
 		Page<Usuario> list = usuarioService.search(usuario, dataInicial, dataFinal, page, linesPerPage, orderBy, direction);
 		return ResponseEntity.ok().body(list);
 	}
+	
+/*
+@RequestMapping(method = RequestMethod.GET)
+public ResponseEntity<Page<ProdutoDTO>> findPage(@RequestParam(value = "page", defaultValue = "0") Integer page,
+@RequestParam(value = "linesPerPage", defaultValue = "24") Integer linesPerPage,
+@RequestParam(value = "orderBy", defaultValue = "name") String orderBy,
+@RequestParam(value = "direction", defaultValue = "ASC") String direction,
+@RequestParam(value = "nome", defaultValue = "") String nome,
+@RequestParam(value = "categorias") Integer[] categorias) {
+List<Integer> listCategorieIds = Objects.nonNull(categorias) ? Arrays.asList(categorias): Collections.emptyList();
+Page<ProdutoDTO> categoriasDto = service.search(name, listCategorieIds, page, linesPerPage, orderBy, direction).map(ProdutoDTO::new);
+return ResponseEntity.ok().body(categoriasDto);
+}
+
+*/
 
 }
